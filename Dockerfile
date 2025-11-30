@@ -1,5 +1,5 @@
 # Use the official FrankenPHP image
-FROM dunglas/frankenphp:1.2-php8.4
+FROM dunglas/frankenphp:php8.4
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
