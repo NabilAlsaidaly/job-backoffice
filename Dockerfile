@@ -1,5 +1,5 @@
 # Use the official FrankenPHP image
-FROM dunglas/frankenphp
+FROM dunglas/frankenphp:1.2-php8.4
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -64,4 +64,4 @@ EXPOSE 80
 EXPOSE 443
 
 # Start FrankenPHP
-CMD ["frankenphp", "run", "--config", "/etc/caddy/Caddyfile"] 
+CMD ["frankenphp", "run", "--config", "/etc/caddy/Caddyfile"]
