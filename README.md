@@ -1,61 +1,211 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+🛠️ Job Backoffice – Admin & Company Dashboard
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Laravel-based administrative dashboard for managing the Job Platform ecosystem.
+This backend application provides full CRUD operations, analytics, company management, job posting, job applications, user management, and role-based access.
 
-## About Laravel
+It works together with:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+job-app (User Job Application Frontend)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+job-shared (Shared Models Package)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+📌 Features
+🔐 Authentication & Roles
 
-## Learning Laravel
+Admin login (via Laravel Breeze)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Company Owner login
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Role-based access using custom middleware
+(admin, company-owner)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Email verification, password reset, session control
 
-## Laravel Sponsors
+🏢 Company Management
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Create / Edit / Archive companies
 
-### Premium Partners
+Assign company owners
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+View company details and related vacancies
 
-## Contributing
+💼 Job Categories
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Create, edit, list job categories
 
-## Code of Conduct
+Used as filters and classification system
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+📄 Job Vacancies
 
-## Security Vulnerabilities
+Full CRUD for job postings
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Attach categories & company
 
-## License
+Visibility control
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+View all applications per vacancy
+
+👤 User Management
+
+Admin can view & edit all users
+
+Company owners can view job seekers who applied to their vacancies
+
+Profile update & password update sections
+
+📨 Job Applications
+
+View, update, manage job applications
+
+View applicant details and resume
+
+Status updates (pending, accepted, rejected)
+
+📊 Dashboard & Analytics
+
+Overview of active users
+
+Total jobs
+
+Total applications
+
+Most applied jobs
+
+Conversion rates (if implemented)
+
+Statistics stored via migration add_analytics.php
+
+🚀 Tech Stack
+
+Laravel 12
+
+Laravel Breeze
+
+TailwindCSS
+
+Blade Components
+
+Vite
+
+MySQL / MariaDB
+
+job-shared package (private shared library)
+
+PestPHP (for testing)
+
+📁 Project Structure
+app/
+├── Http/
+│ ├── Controllers/
+│ │ ├── Auth/...
+│ │ ├── DashboardController.php
+│ │ ├── CompanyController.php
+│ │ ├── JobVacancyController.php
+│ │ ├── JobApplicationController.php
+│ │ └── UserController.php
+│ ├── Middleware/RoleMiddleware.php
+│ └── Requests/
+│ ├── JobVacancyCreateRequest.php
+│ ├── CompanyUpdateRequest.php
+│ ├── JobApplicationUpdateRequest.php
+│ └── ...
+├── Models/
+└── View/Components/
+resources/
+├── views/
+│ ├── dashboard/
+│ ├── company/
+│ ├── job-vacancy/
+│ ├── job-application/
+│ ├── user/
+│ └── auth/
+
+📦 Using the Shared Package (job-shared)
+
+This project uses a shared package that contains:
+
+Models
+
+Shared logic
+
+Database-related structures
+
+Installation (already configured):
+"repositories": [
+{
+"type": "vcs",
+"url": "https://github.com/NabilAlsaidaly/job-shared.git"
+}
+]
+
+Then:
+
+composer require job/shared:@dev
+
+Models can be used directly:
+
+use App\Models\JobVacancy;
+use App\Models\Company;
+
+🔐 Role Middleware
+
+Custom middleware ensures correct access:
+
+public function handle($request, Closure $next, $role)
+{
+    if (auth()->user()->role !== $role) {
+        abort(403);
+    }
+    return $next($request);
+}
+
+Used in routes:
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+// admin pages
+});
+
+🧪 Testing
+
+PestPHP is used for testing:
+
+php artisan test
+
+Includes:
+
+Authentication tests
+
+User tests
+
+Example feature tests
+
+🛠 Installation
+
+1. Clone the Repository
+   git clone https://github.com/NabilAlsaidaly/job-backoffice.git
+   cd job-backoffice
+
+2. Install Dependencies
+   composer install
+   npm install
+
+3. Environment Setup
+   cp .env.example .env
+   php artisan key:generate
+
+Configure database in .env.
+
+4. Run Migrations
+   php artisan migrate --seed
+
+5. Start Development Server
+   php artisan serve
+   npm run dev
+
+🧩 Admin & Company Owner Roles
+Role Permissions
+Admin Manage users, companies, categories, vacancies, applications, full dashboard access
+Company Owner Manage own job vacancies, view applications, update status, view company dashboard
+📄 License
+
+MIT License.
